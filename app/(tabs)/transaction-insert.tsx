@@ -1,3 +1,4 @@
+// pages/TransactionInsert.tsx
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Switch, ScrollView, StyleSheet, Platform, StatusBar } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
@@ -5,6 +6,8 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { TextInputMask } from 'react-native-masked-text';
 import categories from '@/Models/Category/category';
 import paymentTypes from '@/Models/Category/payment-type';
+import { Transaction } from '@/Models/Transaction';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 
 export default function TransactionInsert() {
     const [description, setDescription] = useState('');
@@ -15,6 +18,13 @@ export default function TransactionInsert() {
     const [date, setDate] = useState(new Date());
     const [isPaid, setIsPaid] = useState(false);
     const [showDatePicker, setShowDatePicker] = useState(false);
+    const [transactions, setTransactions] = useState<Transaction[]>([]);
+    type RootStackParamList = {
+        TransactionList: { transactions: Transaction[] };
+        // other routes can be added here
+    };
+    
+    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
     const handleDateChange = (event: any, selectedDate?: Date | undefined): void => {
         const currentDate: Date = selectedDate || date;
@@ -23,8 +33,8 @@ export default function TransactionInsert() {
     };
 
     const handleSubmit = () => {
-        // Lógica para enviar os dados da transação
-        console.log({
+        const newTransaction: Transaction = {
+            id: Math.random().toString(),
             description,
             amount,
             transactionType,
@@ -32,7 +42,20 @@ export default function TransactionInsert() {
             paymentType,
             date,
             isPaid,
-        });
+        };
+        setTransactions([...transactions, newTransaction]);
+        // Limpar os campos após salvar
+        setDescription('');
+        setAmount('');
+        setTransactionType('receita');
+        setCategory(categories[0].id);
+        setPaymentType(paymentTypes[0].id);
+        setDate(new Date());
+        setIsPaid(false);
+    };
+
+    const handleViewTransactions = () => {
+        navigation.navigate('TransactionList', { transactions });
     };
 
     return (
@@ -116,6 +139,7 @@ export default function TransactionInsert() {
 
             <View style={styles.buttonContainer}>
                 <Button title="Salvar Transação" onPress={handleSubmit} />
+                <Button title="Ver Transações" onPress={handleViewTransactions} />
             </View>
         </View>
     );
