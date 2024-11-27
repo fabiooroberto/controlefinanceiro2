@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Switch, ScrollView } from 'react-native';
+import { View, Text, TextInput, Button, Switch, ScrollView, StyleSheet, Platform, StatusBar } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { TextInputMask } from 'react-native-masked-text';
 import categories from '@/Models/Category/category';
 import paymentTypes from '@/Models/Category/payment-type';
-import styles from '@/constants/style';
 
 export default function TransactionInsert() {
     const [description, setDescription] = useState('');
@@ -17,8 +16,8 @@ export default function TransactionInsert() {
     const [isPaid, setIsPaid] = useState(false);
     const [showDatePicker, setShowDatePicker] = useState(false);
 
-    const handleDateChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
+    const handleDateChange = (event: any, selectedDate?: Date | undefined): void => {
+        const currentDate: Date = selectedDate || date;
         setShowDatePicker(false);
         setDate(currentDate);
     };
@@ -37,17 +36,17 @@ export default function TransactionInsert() {
     };
 
     return (
-        <View style={ styles.container}>
-            <ScrollView contentContainerStyle={{ padding: 20 }}>
-                <Text>Descrição</Text>
+        <View style={styles.container}>
+            <ScrollView contentContainerStyle={styles.scrollContainer}>
+                <Text style={styles.label}>Descrição</Text>
                 <TextInput
                     value={description}
                     onChangeText={setDescription}
                     placeholder="Descrição"
-                    style={{ borderBottomWidth: 1, marginBottom: 20 }}
+                    style={styles.input}
                 />
 
-                <Text>Valor</Text>
+                <Text style={styles.label}>Valor</Text>
                 <TextInputMask
                     type={'money'}
                     options={{
@@ -60,24 +59,24 @@ export default function TransactionInsert() {
                     value={amount}
                     onChangeText={text => setAmount(text)}
                     placeholder="Valor"
-                    style={{ borderBottomWidth: 1, marginBottom: 20 }}
+                    style={styles.input}
                 />
 
-                <Text>Tipo de Transação</Text>
+                <Text style={styles.label}>Tipo de Transação</Text>
                 <Picker
                     selectedValue={transactionType}
                     onValueChange={(itemValue) => setTransactionType(itemValue)}
-                    style={{ marginBottom: 20 }}
+                    style={styles.picker}
                 >
                     <Picker.Item label="Receita" value="receita" />
                     <Picker.Item label="Despesa" value="despesa" />
                 </Picker>
 
-                <Text>Categoria</Text>
+                <Text style={styles.label}>Categoria</Text>
                 <Picker
                     selectedValue={category}
                     onValueChange={(itemValue) => setCategory(itemValue)}
-                    style={{ marginBottom: 20 }}
+                    style={styles.picker}
                 >
                     {categories.map((cat) =>
                         cat.data.map((dataItem) => (
@@ -86,18 +85,18 @@ export default function TransactionInsert() {
                     )}
                 </Picker>
 
-                <Text>Tipo de Pagamento</Text>
+                <Text style={styles.label}>Tipo de Pagamento</Text>
                 <Picker
                     selectedValue={paymentType}
                     onValueChange={(itemValue) => setPaymentType(itemValue)}
-                    style={{ marginBottom: 20 }}
+                    style={styles.picker}
                 >
                     {paymentTypes.map((type) => (
                         <Picker.Item key={type.id} label={type.name} value={type.id} />
                     ))}
                 </Picker>
 
-                <Text>Data</Text>
+                <Text style={styles.label}>Data</Text>
                 <Button title="Escolher Data" onPress={() => setShowDatePicker(true)} />
                 {showDatePicker && (
                     <DateTimePicker
@@ -107,17 +106,63 @@ export default function TransactionInsert() {
                         onChange={handleDateChange}
                     />
                 )}
-                <Text>{date.toLocaleDateString()}</Text>
+                <Text style={styles.dateText}>{date.toLocaleDateString('pt-BR')}</Text>
 
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
-                    <Text>Pago</Text>
+                <View style={styles.switchContainer}>
+                    <Text style={styles.label}>Pago</Text>
                     <Switch value={isPaid} onValueChange={setIsPaid} />
                 </View>
             </ScrollView>
 
-            <View style={{ padding: 20 }}>
+            <View style={styles.buttonContainer}>
                 <Button title="Salvar Transação" onPress={handleSubmit} />
             </View>
         </View>
     );
-};
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#f5f5f5',
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+    },
+    scrollContainer: {
+        padding: 20,
+    },
+    label: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 5,
+    },
+    input: {
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc',
+        marginBottom: 20,
+        padding: 10,
+        fontSize: 16,
+        backgroundColor: '#fff',
+        borderRadius: 5,
+    },
+    picker: {
+        marginBottom: 20,
+        backgroundColor: '#fff',
+        borderRadius: 5,
+    },
+    dateText: {
+        fontSize: 16,
+        marginTop: 10,
+        marginBottom: 20,
+    },
+    switchContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 20,
+    },
+    buttonContainer: {
+        padding: 20,
+        backgroundColor: '#fff',
+        borderTopWidth: 1,
+        borderTopColor: '#ccc',
+    },
+});
