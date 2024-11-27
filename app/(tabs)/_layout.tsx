@@ -25,6 +25,13 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+      name="transaction-insert"
+      options={{
+        title: 'Inserir Transação',
+        tabBarIcon: ({ color }) => <Ionicons size={28} name='pulse' color={color} />,
+      }}
+    />
+      <Tabs.Screen
         name="category"
         options={{
           title: 'Categorias',
