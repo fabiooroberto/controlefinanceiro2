@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, Platform, StatusBar } from 'react-native';
 import { Transaction } from '@/Models/Transaction';
 import { getTransactions } from '@/mocks/transactions';
+import { Link } from 'expo-router';
 
 const groupTransactionsByMonth = (transactions: Transaction[]) => {
     return transactions.reduce((groups: { [key: string]: Transaction[] }, transaction) => {
@@ -30,6 +31,7 @@ const TransactionList: React.FC = () => {
 
     return (
         <View style={styles.container}>
+                <Link style={styles.monthHeader} href={'/transaction-insert'}>Adicionar Transação</Link>
             <FlatList
                 data={Object.keys(groupedTransactions)}
                 keyExtractor={(item) => item}
