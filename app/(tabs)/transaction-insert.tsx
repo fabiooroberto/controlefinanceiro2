@@ -4,17 +4,17 @@ import { View, Text, TextInput, Button, Switch, ScrollView, StyleSheet, Platform
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { TextInputMask } from 'react-native-masked-text';
-import categories from '@/Models/Category/category';
 import paymentTypes from '@/Models/Category/payment-type';
 import { Transaction } from '@/Models/Transaction';
 import { useNavigation } from '@react-navigation/native';
 import { addTransaction } from '@/mocks/transactions';
+import { categoriesData } from './category/category-mock';
 
 export default function TransactionInsert() {
     const [description, setDescription] = useState('');
     const [amount, setAmount] = useState('');
     const [transactionType, setTransactionType] = useState('receita');
-    const [category, setCategory] = useState(categories[0].id);
+    const [category, setCategory] = useState(categoriesData[0].id);
     const [paymentType, setPaymentType] = useState(paymentTypes[0].id);
     const [date, setDate] = useState(new Date());
     const [isPaid, setIsPaid] = useState(false);
@@ -43,95 +43,104 @@ export default function TransactionInsert() {
         setDescription('');
         setAmount('');
         setTransactionType('receita');
-        setCategory(categories[0].id);
+        setCategory(categoriesData[0].id);
         setPaymentType(paymentTypes[0].id);
         setDate(new Date());
         setIsPaid(false);
     };
 
     return (
-        <View style={styles.container}>
-            <ScrollView contentContainerStyle={styles.scrollContainer}>
-                <Text style={styles.label}>Descrição</Text>
-                <TextInput
-                    value={description}
-                    onChangeText={setDescription}
-                    placeholder="Descrição"
-                    style={styles.input}
+      <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <Text style={styles.label}>Descrição</Text>
+          <TextInput
+            value={description}
+            onChangeText={setDescription}
+            placeholder="Descrição"
+            style={styles.input}
+          />
+
+          <Text style={styles.label}>Valor</Text>
+          <TextInputMask
+            type={"money"}
+            options={{
+              precision: 2,
+              separator: ",",
+              delimiter: ".",
+              unit: "R$ ",
+              suffixUnit: "",
+            }}
+            value={amount}
+            onChangeText={(text) => setAmount(text)}
+            placeholder="Valor"
+            style={styles.input}
+          />
+
+          <Text style={styles.label}>Tipo de Transação</Text>
+          <Picker
+            selectedValue={transactionType}
+            onValueChange={(itemValue) => setTransactionType(itemValue)}
+            style={styles.picker}
+          >
+            <Picker.Item label="Receita" value="receita" />
+            <Picker.Item label="Despesa" value="despesa" />
+          </Picker>
+
+          <Text style={styles.label}>Categoria</Text>
+          <Picker
+            selectedValue={category}
+            onValueChange={(itemValue) => setCategory(itemValue)}
+            style={styles.picker}
+          >
+            {categoriesData.map((cat) =>
+              cat.data.map((dataItem) => (
+                <Picker.Item
+                  key={dataItem.id}
+                  label={dataItem.name}
+                  value={dataItem.id}
                 />
+              ))
+            )}
+          </Picker>
 
-                <Text style={styles.label}>Valor</Text>
-                <TextInputMask
-                    type={'money'}
-                    options={{
-                        precision: 2,
-                        separator: ',',
-                        delimiter: '.',
-                        unit: 'R$ ',
-                        suffixUnit: ''
-                    }}
-                    value={amount}
-                    onChangeText={text => setAmount(text)}
-                    placeholder="Valor"
-                    style={styles.input}
-                />
+          <Text style={styles.label}>Tipo de Pagamento</Text>
+          <Picker
+            selectedValue={paymentType}
+            onValueChange={(itemValue) => setPaymentType(itemValue)}
+            style={styles.picker}
+          >
+            {paymentTypes.map((type) => (
+              <Picker.Item key={type.id} label={type.name} value={type.id} />
+            ))}
+          </Picker>
 
-                <Text style={styles.label}>Tipo de Transação</Text>
-                <Picker
-                    selectedValue={transactionType}
-                    onValueChange={(itemValue) => setTransactionType(itemValue)}
-                    style={styles.picker}
-                >
-                    <Picker.Item label="Receita" value="receita" />
-                    <Picker.Item label="Despesa" value="despesa" />
-                </Picker>
+          <Text style={styles.label}>Data</Text>
+          <Button
+            title="Escolher Data"
+            onPress={() => setShowDatePicker(true)}
+          />
+          {showDatePicker && (
+            <DateTimePicker
+              value={date}
+              mode="date"
+              display="default"
+              onChange={handleDateChange}
+            />
+          )}
+          <Text style={styles.dateText}>
+            {date.toLocaleDateString("pt-BR")}
+          </Text>
 
-                <Text style={styles.label}>Categoria</Text>
-                <Picker
-                    selectedValue={category}
-                    onValueChange={(itemValue) => setCategory(itemValue)}
-                    style={styles.picker}
-                >
-                    {categories.map((cat) =>
-                        cat.data.map((dataItem) => (
-                            <Picker.Item key={dataItem.id} label={dataItem.name} value={dataItem.id} />
-                        ))
-                    )}
-                </Picker>
+          <View style={styles.switchContainer}>
+            <Text style={styles.label}>Pago</Text>
+            <Switch value={isPaid} onValueChange={setIsPaid} />
+          </View>
+        </ScrollView>
 
-                <Text style={styles.label}>Tipo de Pagamento</Text>
-                <Picker
-                    selectedValue={paymentType}
-                    onValueChange={(itemValue) => setPaymentType(itemValue)}
-                    style={styles.picker}
-                >
-                    {paymentTypes.map((type) => (
-                        <Picker.Item key={type.id} label={type.name} value={type.id} />
-                    ))}
-                </Picker>
-
-                <Text style={styles.label}>Data</Text>
-                <Button title="Escolher Data" onPress={() => setShowDatePicker(true)} />
-                {showDatePicker && (
-                    <DateTimePicker
-                        value={date}
-                        mode="date"
-                        display="default"
-                        onChange={handleDateChange}
-                    />
-                )}
-                <Text style={styles.dateText}>{date.toLocaleDateString('pt-BR')}</Text>
-
-                <View style={styles.switchContainer}>
-                    <Text style={styles.label}>Pago</Text>
-                    <Switch value={isPaid} onValueChange={setIsPaid} />
-                </View>
-            </ScrollView>
-
-            <View style={styles.buttonContainer}>
-                <Button title="Salvar Transação" onPress={handleSubmit} />
-            </View>
+        <View style={styles.buttonContainer}>
+          <Button title="Salvar Transação" onPress={handleSubmit} />
         </View>
+      </View>
     );
 }
 
