@@ -1,8 +1,10 @@
 import styles from '@/constants/style';
-import categoriesData, { CategoryItem, Category } from '@/Models/Category/category';
+import { categoriesData } from "./category-mock";
+import { Category, CategoryItem } from './category-types';
 import React, { useState } from 'react';
 import { View, Text, SectionList, Modal, TextInput, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'; // Certifique-se de ter o pacote @expo/vector-icons instalado
+import { Page } from '@/styled/global';
 
 export default function TabCategory() {
   const [categories, setCategories] = useState<Category[]>(categoriesData);
@@ -82,15 +84,22 @@ export default function TabCategory() {
   };
 
   return (
-    <View style={[styles.container]}>
+    <Page>
       <Text>Categorias</Text>
       <SectionList
         sections={categories}
         renderItem={({ item }) => (
           <View style={styles.item}>
             <View style={styles.itemContent}>
-              <Text style={styles.itemName} onPress={() => openModal(item)}>{item.name}</Text>
-              <Text style={styles.itemDescription} onPress={() => openModal(item)}>{item.description}</Text>
+              <Text style={styles.itemName} onPress={() => openModal(item)}>
+                {item.name}
+              </Text>
+              <Text
+                style={styles.itemDescription}
+                onPress={() => openModal(item)}
+              >
+                {item.description}
+              </Text>
             </View>
             <TouchableOpacity onPress={() => deleteItem(item.id)}>
               <FontAwesome name="trash" size={24} color="red" />
@@ -100,7 +109,7 @@ export default function TabCategory() {
         renderSectionHeader={({ section }) => (
           <Text style={styles.sectionHeader}>{section.title}</Text>
         )}
-        keyExtractor={item => `basicListEntry-${item.id}`}
+        keyExtractor={(item) => `basicListEntry-${item.id}`}
         extraData={categories} // Adicione esta linha para forçar a atualização
       />
       <TouchableOpacity
@@ -117,17 +126,23 @@ export default function TabCategory() {
           onRequestClose={closeModal}
         >
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>{isNewItem ? 'Adicionar Item' : 'Editar Item'}</Text>
+            <Text style={styles.modalText}>
+              {isNewItem ? "Adicionar Item" : "Editar Item"}
+            </Text>
             <TextInput
               style={styles.input}
               value={selectedItem.name}
-              onChangeText={(text) => setSelectedItem({ ...selectedItem, name: text })}
+              onChangeText={(text) =>
+                setSelectedItem({ ...selectedItem, name: text })
+              }
               placeholder="Nome"
             />
             <TextInput
               style={styles.input}
               value={selectedItem.description}
-              onChangeText={(text) => setSelectedItem({ ...selectedItem, description: text })}
+              onChangeText={(text) =>
+                setSelectedItem({ ...selectedItem, description: text })
+              }
               placeholder="Descrição"
             />
             <View style={styles.buttonContainer}>
@@ -135,7 +150,9 @@ export default function TabCategory() {
                 style={[styles.button, styles.buttonOpen]}
                 onPress={saveItem}
               >
-                <Text style={styles.textStyle}>{isNewItem ? 'Adicionar' : 'Salvar'}</Text>
+                <Text style={styles.textStyle}>
+                  {isNewItem ? "Adicionar" : "Salvar"}
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.button, styles.buttonClose]}
@@ -147,6 +164,6 @@ export default function TabCategory() {
           </View>
         </Modal>
       )}
-    </View>
+    </Page>
   );
 }

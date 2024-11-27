@@ -25,17 +25,24 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-      name="TransactionList"
+      name="TransactionList/index"
       options={{
         title: 'Transações',
         tabBarIcon: ({ color }) => <Ionicons size={28} name='pulse' color={color} />,
       }}
     />
       <Tabs.Screen
-        name="category"
+        name="category/index"
         options={{
           title: 'Categorias',
           tabBarIcon: ({ color }) => <Ionicons size={28} name="list-outline" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="Payment/index"
+        options={{
+          title: 'Pagamentos',
+          tabBarIcon: ({ color }) => <Ionicons size={28} name="cash-outline" color={color} />,
         }}
       />
       <Tabs.Screen
