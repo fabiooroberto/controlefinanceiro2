@@ -8,7 +8,7 @@ import paymentTypes from '@/Models/Category/payment-type';
 import { Transaction } from '@/Models/Transaction';
 import { useNavigation } from '@react-navigation/native';
 import { addTransaction } from '@/mocks/transactions';
-import { categoriesData } from './category/category-mock';
+import { categoriesData } from '../(tabs)/category/category-mock';
 
 export default function TransactionInsert() {
     const [description, setDescription] = useState('');

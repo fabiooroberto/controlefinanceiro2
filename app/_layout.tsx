@@ -31,6 +31,10 @@ export default function RootLayout() {
       <SafeAreaProvider>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="(modals)/transaction-insert" options={{
+            presentation: "modal",
+            title: "Inserir transação"
+          }} />
         </Stack>
       </SafeAreaProvider>
       <StatusBar style="auto" />

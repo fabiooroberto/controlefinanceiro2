@@ -1,13 +1,15 @@
-import { Page } from '@/styled/global';
+import { Page, Container } from '@/styled/global';
 import * as S from './styled';
 
 
 export default function {{pascalCase name}}{{pascalCase type}}() {
   return (
   <Page>
+    <Container>
     <S.Title>
       {{pascalCase name}}
     </S.Title>
+    </Container>
   </Page>
 );
 }
