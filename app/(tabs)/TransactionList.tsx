@@ -1,5 +1,4 @@
-// pages/TransactionList.tsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, Platform, StatusBar } from 'react-native';
 import { Transaction } from '@/Models/Transaction';
 import { getTransactions } from '@/mocks/transactions';
@@ -16,8 +15,18 @@ const groupTransactionsByMonth = (transactions: Transaction[]) => {
 };
 
 const TransactionList: React.FC = () => {
-    const transactions = getTransactions();
-    const groupedTransactions = groupTransactionsByMonth(transactions);
+    const [transactions, setTransactions] = useState<Transaction[]>([]);
+    const [groupedTransactions, setGroupedTransactions] = useState<{ [key: string]: Transaction[] }>({});
+
+    useEffect(() => {
+        const fetchTransactions = () => {
+            const transactions = getTransactions();
+            setTransactions(transactions);
+            setGroupedTransactions(groupTransactionsByMonth(transactions));
+        };
+
+        fetchTransactions();
+    }, []);
 
     return (
         <View style={styles.container}>
