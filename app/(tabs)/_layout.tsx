@@ -25,9 +25,9 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-      name="transaction-insert"
+      name="TransactionList"
       options={{
-        title: 'Inserir Transação',
+        title: 'Transações',
         tabBarIcon: ({ color }) => <Ionicons size={28} name='pulse' color={color} />,
       }}
     />
@@ -43,6 +43,13 @@ export default function TabLayout() {
         options={{
           title: 'Tipos de pagamento',
           tabBarIcon: ({ color }) => <Ionicons size={28} name="list-outline" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="transaction-insert"
+        options={{
+          title: 'Inserir transação',
+          tabBarIcon: ({ color }) => <Ionicons size={28} name="pulse-sharp" color={color} />,
         }}
       />
     </Tabs>

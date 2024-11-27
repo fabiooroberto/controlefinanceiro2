@@ -2,9 +2,9 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, Platform, StatusBar } from 'react-native';
 import { Transaction } from '@/Models/Transaction';
-import transactions from '@/mocks/transactions';
+import { getTransactions } from '@/mocks/transactions';
 
-const groupTransactionsByMonth = (transactions: Transaction[]): { [key: string]: Transaction[] } => {
+const groupTransactionsByMonth = (transactions: Transaction[]) => {
     return transactions.reduce((groups: { [key: string]: Transaction[] }, transaction) => {
         const month = transaction.date.toLocaleString('pt-BR', { month: 'long', year: 'numeric' });
         if (!groups[month]) {
@@ -16,6 +16,7 @@ const groupTransactionsByMonth = (transactions: Transaction[]): { [key: string]:
 };
 
 const TransactionList: React.FC = () => {
+    const transactions = getTransactions();
     const groupedTransactions = groupTransactionsByMonth(transactions);
 
     return (

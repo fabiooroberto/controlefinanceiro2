@@ -1,7 +1,7 @@
 // mocks/transactions.ts
 import { Transaction } from '@/Models/Transaction';
 
-const transactions: Transaction[] = [
+let transactions: Transaction[] = [
     {
         id: '1',
         description: 'Compra de supermercado',
@@ -44,4 +44,10 @@ const transactions: Transaction[] = [
     },
 ];
 
-export default transactions;
+export const getTransactions = () => transactions;
+
+export const addTransaction = (transaction: Transaction) => {
+    console.log('Adding transaction:', transaction);
+    transactions = [...transactions, transaction];
+    console.log('Transactions:', transactions);
+};

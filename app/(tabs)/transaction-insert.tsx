@@ -7,7 +7,8 @@ import { TextInputMask } from 'react-native-masked-text';
 import categories from '@/Models/Category/category';
 import paymentTypes from '@/Models/Category/payment-type';
 import { Transaction } from '@/Models/Transaction';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import { addTransaction } from '@/mocks/transactions';
 
 export default function TransactionInsert() {
     const [description, setDescription] = useState('');
@@ -18,13 +19,7 @@ export default function TransactionInsert() {
     const [date, setDate] = useState(new Date());
     const [isPaid, setIsPaid] = useState(false);
     const [showDatePicker, setShowDatePicker] = useState(false);
-    const [transactions, setTransactions] = useState<Transaction[]>([]);
-    type RootStackParamList = {
-        TransactionList: { transactions: Transaction[] };
-        // other routes can be added here
-    };
-    
-    const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+    const navigation = useNavigation();
 
     const handleDateChange = (event: any, selectedDate?: Date | undefined): void => {
         const currentDate: Date = selectedDate || date;
@@ -43,7 +38,7 @@ export default function TransactionInsert() {
             date,
             isPaid,
         };
-        setTransactions([...transactions, newTransaction]);
+        addTransaction(newTransaction);
         // Limpar os campos após salvar
         setDescription('');
         setAmount('');
@@ -52,10 +47,6 @@ export default function TransactionInsert() {
         setPaymentType(paymentTypes[0].id);
         setDate(new Date());
         setIsPaid(false);
-    };
-
-    const handleViewTransactions = () => {
-        navigation.navigate('TransactionList', { transactions });
     };
 
     return (
@@ -139,7 +130,6 @@ export default function TransactionInsert() {
 
             <View style={styles.buttonContainer}>
                 <Button title="Salvar Transação" onPress={handleSubmit} />
-                <Button title="Ver Transações" onPress={handleViewTransactions} />
             </View>
         </View>
     );
