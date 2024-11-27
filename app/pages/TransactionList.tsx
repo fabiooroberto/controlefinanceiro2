@@ -2,10 +2,7 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, Platform, StatusBar } from 'react-native';
 import { Transaction } from '@/Models/Transaction';
-
-interface TransactionListProps {
-    transactions: Transaction[];
-}
+import transactions from '@/mocks/transactions';
 
 const groupTransactionsByMonth = (transactions: Transaction[]): { [key: string]: Transaction[] } => {
     return transactions.reduce((groups: { [key: string]: Transaction[] }, transaction) => {
@@ -18,7 +15,7 @@ const groupTransactionsByMonth = (transactions: Transaction[]): { [key: string]:
     }, {});
 };
 
-const TransactionList: React.FC<TransactionListProps> = ({ transactions }) => {
+const TransactionList: React.FC = () => {
     const groupedTransactions = groupTransactionsByMonth(transactions);
 
     return (
