@@ -7,7 +7,6 @@ export const Page = styled.SafeAreaView`
   background-color: ${({ theme }: { theme: DefaultTheme }) =>
     theme.colors.background};
   padding-top: ${Platform.OS === "ios" ? '20px' : `${StatusBar.currentHeight}px`};
-  margin-bottom: 50px;
 `;
 
 export const Container = styled.View`

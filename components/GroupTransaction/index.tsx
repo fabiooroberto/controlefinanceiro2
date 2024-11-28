@@ -3,6 +3,8 @@ import * as S from './styled';
 import { Transaction } from '@/Models/Transaction';
 import { useEffect } from 'react';
 import ItemTransactionMin from '@/components/ItemTransaction';
+import { View } from 'react-native';
+import theme from '@/styled/theme';
 
 export interface GroupTransactionMinProps {
   data: Transaction[];
@@ -17,7 +19,7 @@ export default function GroupTransactionMin(props: GroupTransactionMinProps) {
   }, [props.data]);
 
   return (
-    <Page>
+    <View style={{borderRadius: theme.borderRadius.lg, padding: 5, marginBottom: 5, borderColor: theme.colors.secondary500, borderWidth: 1}}>
       <S.Title>{props.month}</S.Title>
       {props.data.map((item, index) => (
         <ItemTransactionMin
@@ -31,6 +33,6 @@ export default function GroupTransactionMin(props: GroupTransactionMinProps) {
           key={item.id}
         />
       ))}
-    </Page>
+    </View>
   );
 }

@@ -1,4 +1,3 @@
-import { Page } from '@/styled/global';
 import * as S from './styled';
 
 
@@ -28,14 +27,3 @@ export default function ItemTransactionMin(props: ItemTransactionMinProps) {
     </S.Item>
   );
 }
-
-//  <View>
-//    <Text style={styles.monthHeader}>{item}</Text>
-//    {groupedTransactions[item].map((transaction) => (
-//      <View key={transaction.id} style={styles.transactionItem}>
-//        <Text>{transaction.description}</Text>
-//        <Text>{transaction.amount}</Text>
-//        <Text>{transaction.date.toLocaleDateString("pt-BR")}</Text>
-//      </View>
-//    ))}
-//  </View>;

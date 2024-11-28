@@ -230,5 +230,6 @@ export const getTransactions = () => transactions;
 export const addTransaction = (transaction: Transaction) => {
     console.log('Adding transaction:', transaction);
     transactions = [...transactions, transaction];
+    transactions.sort((a, b) => b.date.getTime() - a.date.getTime());
     console.log('Transactions:', transactions);
 };
