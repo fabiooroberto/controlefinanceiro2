@@ -1,4 +1,3 @@
-import { Page } from '@/styled/global';
 import * as S from './styled';
 import { Transaction } from '@/Models/Transaction';
 import { useEffect } from 'react';
