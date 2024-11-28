@@ -1,9 +1,10 @@
 import styles from '@/constants/style';
+import * as S from './styled';
 import paymentTypesData, { PaymentTypeItem } from '@/Models/Category/payment-type';
 import React, { useState } from 'react';
 import { View, Text, FlatList, Modal, TextInput, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'; // Certifique-se de ter o pacote @expo/vector-icons instalado
-import { Page } from '@/styled/global';
+import { Container, Page } from '@/styled/global';
 export default function TabPaymentType() {
   const [paymentTypes, setPaymentTypes] = useState<PaymentTypeItem[]>(paymentTypesData);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -58,7 +59,9 @@ export default function TabPaymentType() {
 
   return (
     <Page>
-      <Text>Tipos de pagamentos</Text>
+      <Container>
+      <S.Title>Tipos de pagamentos</S.Title>
+      <S.SubTitle>Adicione, edite ou remova tipos de pagamentos</S.SubTitle>
       <FlatList
         data={paymentTypes}
         renderItem={({ item }) => (
@@ -118,6 +121,7 @@ export default function TabPaymentType() {
           </View>
         </Modal>
       )}
+      </Container>
     </Page>
   );
 }

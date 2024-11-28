@@ -21,35 +21,28 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <Ionicons size={28} name='home' color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons size={28} name="home-outline" color={color} />,
         }}
       />
       <Tabs.Screen
       name="TransactionList/index"
       options={{
         title: 'Transações',
-        tabBarIcon: ({ color }) => <Ionicons size={28} name='pulse' color={color} />,
+        tabBarIcon: ({ color }) => <Ionicons size={28} name="list-outline" color={color} />,
       }}
     />
       <Tabs.Screen
         name="category/index"
         options={{
           title: 'Categorias',
-          tabBarIcon: ({ color }) => <Ionicons size={28} name="list-outline" color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons size={28} name="pricetags-outline" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="Payment/index"
-        options={{
-          title: 'Pagamentos',
-          tabBarIcon: ({ color }) => <Ionicons size={28} name="cash-outline" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="payment-type"
+        name= "PaymentType/index"
         options={{
           title: 'Tipos de pagamento',
-          tabBarIcon: ({ color }) => <Ionicons size={28} name="list-outline" color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons size={28} name="card-outline" color={color} />,
         }}
       />
       <Tabs.Screen
@@ -57,6 +50,13 @@ export default function TabLayout() {
         options={{
           title: 'Inserir transação',
           tabBarIcon: ({ color }) => <Ionicons size={28} name="pulse-sharp" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="Payment/index"
+        options={{
+          title: 'Pagamentos',
+          tabBarIcon: ({ color }) => <Ionicons size={28} name="cash-outline" color={color} />,
         }}
       />
     </Tabs>

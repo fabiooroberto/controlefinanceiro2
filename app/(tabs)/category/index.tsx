@@ -1,10 +1,11 @@
 import styles from '@/constants/style';
+import * as S from './styled';
 import { categoriesData } from "./category-mock";
 import { Category, CategoryItem } from './category-types';
 import React, { useState } from 'react';
 import { View, Text, SectionList, Modal, TextInput, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'; // Certifique-se de ter o pacote @expo/vector-icons instalado
-import { Page } from '@/styled/global';
+import { Container, Page } from '@/styled/global';
 
 export default function TabCategory() {
   const [categories, setCategories] = useState<Category[]>(categoriesData);
@@ -85,7 +86,9 @@ export default function TabCategory() {
 
   return (
     <Page>
-      <Text>Categorias</Text>
+      <Container>
+      <S.Title>Categorias</S.Title>
+      <S.SubTitle>Adicione, edite ou remova categorias</S.SubTitle>
       <SectionList
         sections={categories}
         renderItem={({ item }) => (
@@ -164,6 +167,7 @@ export default function TabCategory() {
           </View>
         </Modal>
       )}
+      </Container>
     </Page>
   );
 }
