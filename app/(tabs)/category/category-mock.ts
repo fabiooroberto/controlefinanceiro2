@@ -1,4 +1,6 @@
-export const categoriesData = [
+import { Category } from "./category-types";
+
+export const categoriesData: Category[] = [
   {
     id: "1",
     title: "D",
@@ -30,4 +32,3 @@ export const categoriesData = [
     ],
   },
 ];
-

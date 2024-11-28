@@ -6,7 +6,6 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { TextInputMask } from 'react-native-masked-text';
 import paymentTypes from '@/Models/Category/payment-type';
 import { Transaction } from '@/Models/Transaction';
-import { useNavigation } from '@react-navigation/native';
 import { addTransaction } from '@/mocks/transactions';
 import { categoriesData } from '../(tabs)/category/category-mock';
 
@@ -19,7 +18,6 @@ export default function TransactionInsert() {
     const [date, setDate] = useState(new Date());
     const [isPaid, setIsPaid] = useState(false);
     const [showDatePicker, setShowDatePicker] = useState(false);
-    const navigation = useNavigation();
 
     const handleDateChange = (event: any, selectedDate?: Date | undefined): void => {
         const currentDate: Date = selectedDate || date;
@@ -71,7 +69,7 @@ export default function TransactionInsert() {
               suffixUnit: "",
             }}
             value={amount}
-            onChangeText={(text) => setAmount(text)}
+            onChangeText={(text : any) => setAmount(text)}
             placeholder="Valor"
             style={styles.input}
           />

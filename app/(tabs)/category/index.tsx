@@ -4,8 +4,9 @@ import { categoriesData } from "./category-mock";
 import { Category, CategoryItem } from './category-types';
 import React, { useState } from 'react';
 import { View, Text, SectionList, Modal, TextInput, TouchableOpacity } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons'; // Certifique-se de ter o pacote @expo/vector-icons instalado
+import { FontAwesome, Ionicons } from '@expo/vector-icons'; // Certifique-se de ter o pacote @expo/vector-icons instalado
 import { Container, Page } from '@/styled/global';
+import theme from '@/styled/theme';
 
 export default function TabCategory() {
   const [categories, setCategories] = useState<Category[]>(categoriesData);
@@ -60,7 +61,7 @@ export default function TabCategory() {
       } else {
         updatedCategories = updatedCategories.map(section => ({
           ...section,
-          data: section.data.map(item => 
+          data: section.data.map(item =>
             item.id === selectedItem.id ? selectedItem : item
           )
         }));
@@ -87,86 +88,90 @@ export default function TabCategory() {
   return (
     <Page>
       <Container>
-      <S.Title>Categorias</S.Title>
-      <S.SubTitle>Adicione, edite ou remova categorias</S.SubTitle>
-      <SectionList
-        sections={categories}
-        renderItem={({ item }) => (
-          <View style={styles.item}>
-            <View style={styles.itemContent}>
-              <Text style={styles.itemName} onPress={() => openModal(item)}>
-                {item.name}
-              </Text>
-              <Text
-                style={styles.itemDescription}
-                onPress={() => openModal(item)}
-              >
-                {item.description}
-              </Text>
-            </View>
-            <TouchableOpacity onPress={() => deleteItem(item.id)}>
-              <FontAwesome name="trash" size={24} color="red" />
-            </TouchableOpacity>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+          <View>
+            <S.Title>Categorias</S.Title>
+            <S.SubTitle>Adicione, edite ou remova categorias</S.SubTitle>
           </View>
-        )}
-        renderSectionHeader={({ section }) => (
-          <Text style={styles.sectionHeader}>{section.title}</Text>
-        )}
-        keyExtractor={(item) => `basicListEntry-${item.id}`}
-        extraData={categories} // Adicione esta linha para forçar a atualização
-      />
-      <TouchableOpacity
-        style={[styles.addButton]}
-        onPress={() => openModal(null)}
-      >
-        <Text style={styles.textStyle}>Adicionar Novo Item</Text>
-      </TouchableOpacity>
-      {selectedItem && (
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={closeModal}
-        >
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>
-              {isNewItem ? "Adicionar Item" : "Editar Item"}
-            </Text>
-            <TextInput
-              style={styles.input}
-              value={selectedItem.name}
-              onChangeText={(text) =>
-                setSelectedItem({ ...selectedItem, name: text })
-              }
-              placeholder="Nome"
-            />
-            <TextInput
-              style={styles.input}
-              value={selectedItem.description}
-              onChangeText={(text) =>
-                setSelectedItem({ ...selectedItem, description: text })
-              }
-              placeholder="Descrição"
-            />
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                style={[styles.button, styles.buttonOpen]}
-                onPress={saveItem}
-              >
-                <Text style={styles.textStyle}>
-                  {isNewItem ? "Adicionar" : "Salvar"}
+          <View>
+            <S.Button onPress={() => openModal(null)}>
+              <S.ButtonText>Add</S.ButtonText>
+              <Ionicons name='add' size={24} color={theme.colors.textWhite} />
+            </S.Button>
+          </View>
+        </View>
+        <SectionList
+          sections={categories}
+          renderItem={({ item }) => (
+            <View style={styles.item}>
+              <View style={styles.itemContent}>
+                <Text style={styles.itemName} onPress={() => openModal(item)}>
+                  {item.name}
                 </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[styles.button, styles.buttonClose]}
-                onPress={closeModal}
-              >
-                <Text style={styles.textStyle}>Cancelar</Text>
+                <Text
+                  style={styles.itemDescription}
+                  onPress={() => openModal(item)}
+                >
+                  {item.description}
+                </Text>
+              </View>
+              <TouchableOpacity onPress={() => deleteItem(item.id)}>
+                <FontAwesome name="trash" size={24} color="red" />
               </TouchableOpacity>
             </View>
-          </View>
-        </Modal>
-      )}
+          )}
+          renderSectionHeader={({ section }) => (
+            <Text style={styles.sectionHeader}>{section.title}</Text>
+          )}
+          keyExtractor={(item) => `basicListEntry-${item.id}`}
+          extraData={categories} // Adicione esta linha para forçar a atualização
+        />
+        {selectedItem && (
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={closeModal}
+          >
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>
+                {isNewItem ? "Adicionar Item" : "Editar Item"}
+              </Text>
+              <TextInput
+                style={styles.input}
+                value={selectedItem.name}
+                onChangeText={(text) =>
+                  setSelectedItem({ ...selectedItem, name: text })
+                }
+                placeholder="Nome"
+              />
+              <TextInput
+                style={styles.input}
+                value={selectedItem.description}
+                onChangeText={(text) =>
+                  setSelectedItem({ ...selectedItem, description: text })
+                }
+                placeholder="Descrição"
+              />
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                  style={[styles.button, styles.buttonOpen]}
+                  onPress={saveItem}
+                >
+                  <Text style={styles.textStyle}>
+                    {isNewItem ? "Adicionar" : "Salvar"}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={closeModal}
+                >
+                  <Text style={styles.textStyle}>Cancelar</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
+        )}
       </Container>
     </Page>
   );
