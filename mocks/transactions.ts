@@ -1,5 +1,5 @@
 // mocks/transactions.ts
-import { Transaction } from '@/Models/Transaction';
+import { MonthlySummary, Transaction } from '@/Models/Transaction';
 
 let transactions: Transaction[] = [
     {
@@ -233,3 +233,24 @@ export const addTransaction = (transaction: Transaction) => {
     transactions.sort((a, b) => b.date.getTime() - a.date.getTime());
     console.log('Transactions:', transactions);
 };
+
+export function groupTransactionsByMonth(transactions: Transaction[]): MonthlySummary[] {
+    const grouped = transactions.reduce((acc, transaction) => {
+      const month = transaction.date.toISOString().slice(0, 7); // formato YYYY-MM
+      if (!acc[month]) {
+        acc[month] = { totalReceitas: 0, totalDespesas: 0 };
+      }
+      if (transaction.transactionType === 'receita') {
+        acc[month].totalReceitas += parseFloat(transaction.amount.replace('R$', '').replace(',', '.'));
+      } else {
+        acc[month].totalDespesas += parseFloat(transaction.amount.replace('R$', '').replace(',', '.'));
+      }
+      return acc;
+    }, {} as Record<string, { totalReceitas: number; totalDespesas: number }>);
+  
+    return Object.keys(grouped).map(month => ({
+      month,
+      totalReceitas: grouped[month].totalReceitas,
+      totalDespesas: grouped[month].totalDespesas,
+    }));
+  }
