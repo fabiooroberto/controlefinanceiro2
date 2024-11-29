@@ -89,7 +89,7 @@ let transactions: Transaction[] = [
         transactionType: 'receita',
         category: 'Vendas',
         paymentType: 'Pix',
-        date: new Date(2023, 2, 7), // 7 de março de 2023
+        date: new Date(2023, 11, 7), // 7 de março de 2023
         isPaid: true,
     },
     {
@@ -149,7 +149,7 @@ let transactions: Transaction[] = [
         transactionType: 'receita',
         category: 'Educação',
         paymentType: 'Dinheiro',
-        date: new Date(2023, 2, 25), // 25 de março de 2023
+        date: new Date(2024, 2, 25), // 25 de março de 2023
         isPaid: true,
     },
     {
@@ -159,7 +159,7 @@ let transactions: Transaction[] = [
         transactionType: 'despesa',
         category: 'Trabalho',
         paymentType: 'Cartão de Crédito',
-        date: new Date(2023, 2, 27), // 27 de março de 2023
+        date: new Date(2024, 2, 27), // 27 de março de 2023
         isPaid: true,
     },
     {
@@ -169,7 +169,7 @@ let transactions: Transaction[] = [
         transactionType: 'despesa',
         category: 'Entretenimento',
         paymentType: 'Débito Automático',
-        date: new Date(2023, 2, 28), // 28 de março de 2023
+        date: new Date(2024, 3, 28), // 28 de março de 2023
         isPaid: true,
     },
     {
@@ -179,7 +179,7 @@ let transactions: Transaction[] = [
         transactionType: 'receita',
         category: 'Trabalho Extra',
         paymentType: 'Transferência Bancária',
-        date: new Date(2023, 2, 30), // 30 de março de 2023
+        date: new Date(2024, 3, 30), // 30 de março de 2023
         isPaid: true,
     },
     {
@@ -222,7 +222,7 @@ let transactions: Transaction[] = [
         date: new Date(2023, 4, 30), // 30 de maio de 2023
         isPaid: true,
     },
-    
+
 ];
 
 export const getTransactions = () => transactions;
@@ -234,23 +234,58 @@ export const addTransaction = (transaction: Transaction) => {
     console.log('Transactions:', transactions);
 };
 
-export function groupTransactionsByMonth(transactions: Transaction[]): MonthlySummary[] {
+export interface YearMonthGroupedTransactions {
+    year: string
+    months: MonthlySummary[];
+}
+
+const monthOrder = {
+    'janeiro': 0,
+    'fevereiro': 1,
+    'março': 2,
+    'abril': 3,
+    'maio': 4,
+    'junho': 5,
+    'julho': 6,
+    'agosto': 7,
+    'setembro': 8,
+    'outubro': 9,
+    'novembro': 10,
+    'dezembro': 11,
+};
+
+export function groupTransactionsByYearAndMonth(transactions: Transaction[]): YearMonthGroupedTransactions[] {
     const grouped = transactions.reduce((acc, transaction) => {
-      const month = transaction.date.toISOString().slice(0, 7); // formato YYYY-MM
-      if (!acc[month]) {
-        acc[month] = { totalReceitas: 0, totalDespesas: 0 };
-      }
-      if (transaction.transactionType === 'receita') {
-        acc[month].totalReceitas += parseFloat(transaction.amount.replace('R$', '').replace(',', '.'));
-      } else {
-        acc[month].totalDespesas += parseFloat(transaction.amount.replace('R$', '').replace(',', '.'));
-      }
-      return acc;
-    }, {} as Record<string, { totalReceitas: number; totalDespesas: number }>);
-  
-    return Object.keys(grouped).map(month => ({
-      month,
-      totalReceitas: grouped[month].totalReceitas,
-      totalDespesas: grouped[month].totalDespesas,
-    }));
-  }
+        const year = transaction.date.getFullYear().toString();
+        const month = transaction.date.toLocaleString('pt-BR', { month: 'long' }); // formato "mês"
+
+        if (!acc[year]) {
+            acc[year] = [];
+        }
+
+        const monthIndex = acc[year].findIndex(summary => summary.month === month);
+
+        if (monthIndex === -1) {
+            acc[year].push({
+                month,
+                totalReceitas: transaction.transactionType === 'receita' ? parseFloat(transaction.amount.replace('R$', '').replace(',', '.')) : 0,
+                totalDespesas: transaction.transactionType === 'despesa' ? parseFloat(transaction.amount.replace('R$', '').replace(',', '.')) : 0,
+            });
+        } else {
+            if (transaction.transactionType === 'receita') {
+                acc[year][monthIndex].totalReceitas += parseFloat(transaction.amount.replace('R$', '').replace(',', '.'));
+            } else {
+                acc[year][monthIndex].totalDespesas += parseFloat(transaction.amount.replace('R$', '').replace(',', '.'));
+            }
+        }
+
+        return acc;
+    }, {} as Record<string, MonthlySummary[]>);
+
+    return Object.keys(grouped)
+        .sort((a, b) => parseInt(b) - parseInt(a)) // Ordena os anos em ordem decrescente
+        .map(year => ({
+            year,
+            months: grouped[year].sort((a, b) => monthOrder[b.month as keyof typeof monthOrder] - monthOrder[a.month as keyof typeof monthOrder]), // Ordena os meses em ordem decrescente
+        }));
+}

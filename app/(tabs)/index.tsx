@@ -2,11 +2,15 @@ import { Container, Page } from '@/styled/global';
 import { View } from 'react-native';
 import * as S from './styled';
 import MonthlySummaryList from '@/components/MonthlySummaryList';
-import { groupTransactionsByMonth, getTransactions } from '@/mocks/transactions';
+import { groupTransactionsByYearAndMonth, getTransactions } from '@/mocks/transactions';
+import { MonthlySummary } from '@/Models/Transaction';
+import { useState } from 'react';
 
 export default function HomeScreen() {
-  const monthlySummaries = groupTransactionsByMonth(getTransactions());
+  const monthlySummaries = groupTransactionsByYearAndMonth(getTransactions());
+  monthlySummaries
 
+  console.clear();
   return (
     <Page>
       <Container>
@@ -15,7 +19,7 @@ export default function HomeScreen() {
             <S.Title>Categorias</S.Title>
           </View>
         </View>
-        <MonthlySummaryList {...monthlySummaries} />
+        <MonthlySummaryList data={monthlySummaries} />
       </Container>
     </Page>
   );

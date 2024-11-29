@@ -1,6 +1,5 @@
 import styled from 'styled-components/native';
 import { DefaultTheme } from 'styled-components';
-import theme from '@/styled/theme';
 
 export const Title = styled.Text` 
   font-size: 24px;
@@ -8,22 +7,29 @@ export const Title = styled.Text`
   color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.text};
   margin-bottom: 20px;
 `;
+export const Year = styled.Text`
+  font-size: 20px;
+  font-weight: bold;
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.text};
+  margin-top: 20px;
+  margin-bottom: 10px;
+`;
 
 export const Item = styled.View`
-  padding: ${(theme.space.md)};
-  margin: ${(theme.space.md)};
-  border-radius: ${(theme.borderRadius.lg)};
-  border-color: ${(theme.colors.secondary500)};
-  border-width: ${(theme.borderWidth)};
-  background-color: ${(theme.colors.background)};
+  padding: ${({ theme }: { theme: DefaultTheme }) => theme.spacing.md};
+  margin: ${({ theme }: { theme: DefaultTheme }) => theme.spacing.md};
+  border-radius: 16px;
+  border-color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.secondary500};
+  border-width: 2;
+  background-color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.background};
 `;
 
 export const Month = styled.Text`
-  font-size: ${(theme.fontSizes.lg)};
-  font-weight: ${(theme.fontWeights.bold)};
+  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.typography.fontSize.lg};
+  font-weight: ${({ theme }: { theme: DefaultTheme }) => theme.typography.fontWeight.bold};
 `;
 
 export const Amount = styled.Text`
-  font-size: ${(theme.fontSizes.md)};
-  color: ${(theme.colors.text)};
+  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.typography.fontSize.md};
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.text};
 `;
