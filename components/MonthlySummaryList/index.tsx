@@ -16,9 +16,15 @@ export default function MonthlySummaryListMin(props: MonthlySummaryListMinProps)
 
   const renderMonthItem = ({ item }: { item: MonthlySummary }) => (
     <S.Item>
-      <S.Month>{item.month}</S.Month>
-      <S.Amount>Receitas: {item.totalReceitas}</S.Amount>
-      <S.Amount>Despesas: {item.totalDespesas}</S.Amount>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+        <View>
+          <S.Month>{item.month}</S.Month>
+        </View>
+        <View>
+          <S.AmountReceita>Receitas: {item.totalReceitas}</S.AmountReceita>
+          <S.AmountDespesa>Despesas: {item.totalDespesas}</S.AmountDespesa>
+        </View>
+      </View>
     </S.Item>
   );
 

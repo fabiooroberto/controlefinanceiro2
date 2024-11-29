@@ -27,9 +27,15 @@ export const Item = styled.View`
 export const Month = styled.Text`
   font-size: ${({ theme }: { theme: DefaultTheme }) => theme.typography.fontSize.lg};
   font-weight: ${({ theme }: { theme: DefaultTheme }) => theme.typography.fontWeight.bold};
+  text-transform: uppercase;
 `;
 
-export const Amount = styled.Text`
+export const AmountDespesa = styled.Text`
   font-size: ${({ theme }: { theme: DefaultTheme }) => theme.typography.fontSize.md};
-  color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.text};
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.error};
+`;
+
+export const AmountReceita = styled.Text`
+  font-size: ${({ theme }: { theme: DefaultTheme }) => theme.typography.fontSize.md};
+  color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.success};
 `;

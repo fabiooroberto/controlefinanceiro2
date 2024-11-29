@@ -240,18 +240,18 @@ export interface YearMonthGroupedTransactions {
 }
 
 const monthOrder = {
-    'janeiro': 0,
-    'fevereiro': 1,
-    'março': 2,
-    'abril': 3,
-    'maio': 4,
-    'junho': 5,
-    'julho': 6,
-    'agosto': 7,
-    'setembro': 8,
-    'outubro': 9,
-    'novembro': 10,
-    'dezembro': 11,
+    'JAN': 0,
+    'FEV': 1,
+    'MAR': 2,
+    'ABR': 3,
+    'MAI': 4,
+    'JUN': 5,
+    'JUL': 6,
+    'AGO': 7,
+    'SET': 8,
+    'OUT': 9,
+    'NOV': 10,
+    'DEV': 11,
 };
 
 export function groupTransactionsByYearAndMonth(transactions: Transaction[]): YearMonthGroupedTransactions[] {
