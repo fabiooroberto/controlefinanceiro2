@@ -12,7 +12,7 @@ import { categoriesData } from '../(tabs)/category/category-mock';
 export default function TransactionInsert() {
     const [description, setDescription] = useState('');
     const [amount, setAmount] = useState('');
-    const [transactionType, setTransactionType] = useState('receita');
+    const [transactionType, setTransactionType] = useState<'receita' | 'despesa'>('receita');
     const [category, setCategory] = useState(categoriesData[0].id);
     const [paymentType, setPaymentType] = useState(paymentTypes[0].id);
     const [date, setDate] = useState(new Date());
