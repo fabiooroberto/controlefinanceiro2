@@ -1,9 +1,9 @@
 // pages/TransactionInsert.tsx
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Switch, ScrollView, StyleSheet, Platform, StatusBar } from 'react-native';
+import { MaskedTextInput } from 'react-native-mask-text';
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { TextInputMask } from 'react-native-masked-text';
 import paymentTypes from '@/Models/Category/payment-type';
 import { Transaction } from '@/Models/Transaction';
 import { addTransaction } from '@/mocks/transactions';
@@ -59,7 +59,7 @@ export default function TransactionInsert() {
           />
 
           <Text style={styles.label}>Valor</Text>
-          <TextInputMask
+          <MaskedTextInput 
             type={"money"}
             options={{
               precision: 2,
