@@ -54,6 +54,8 @@ Join our community of developers creating universal apps.
 LISTAR DEVICES
 ```bash
 adb devices
+
+adb logcat
 ```
 
 ## Gerar apk com expo

@@ -45,7 +45,7 @@
     "react-native-screens": "~4.1.0",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.2",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.13"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -60,5 +60,15 @@
     "react-test-renderer": "18.3.1",
     "typescript": "^5.3.3"
   },
-  "private": true
+  "private": true,
+  "resolutions": {
+    "styled-components": "^6"
+  },
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "listUnknownPackages": false
+      }
+    }
+  }
 }

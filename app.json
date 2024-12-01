@@ -15,7 +15,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#5856D6"
+        "backgroundColor": "#7DB0B1"
       },
       "package": "com.fabiooroberto.controlefinanceiro"
     },
@@ -32,7 +32,7 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#7DB0B1"
         }
       ]
     ],
