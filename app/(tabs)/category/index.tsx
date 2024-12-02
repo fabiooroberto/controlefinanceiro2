@@ -1,7 +1,7 @@
 import styles from '@/constants/style';
-import * as S from './styled';
-import { categoriesData } from "./category-mock";
-import { Category, CategoryItem } from './category-types';
+import * as S from '@/styled/styled-category';
+import { categoriesData } from "@/mocks/category-mock";
+import { Category, CategoryItem } from '@/mocks/category-types';
 import React, { useState } from 'react';
 import { View, Text, SectionList, Modal, TextInput, TouchableOpacity } from 'react-native';
 import { FontAwesome, Ionicons } from '@expo/vector-icons'; // Certifique-se de ter o pacote @expo/vector-icons instalado

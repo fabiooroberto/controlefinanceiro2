@@ -7,7 +7,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import paymentTypes from '@/Models/Category/payment-type';
 import { Transaction } from '@/Models/Transaction';
 import { addTransaction } from '@/mocks/transactions';
-import { categoriesData } from '../(tabs)/category/category-mock';
+import { categoriesData } from '../../mocks/category-mock';
 
 export default function TransactionInsert() {
   const [description, setDescription] = useState('');

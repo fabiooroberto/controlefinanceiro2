@@ -17,7 +17,10 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#7DB0B1"
       },
-      "package": "com.fabiooroberto.controlefinanceiro"
+      "package": "com.fabiooroberto.controlefinanceiro",
+      "runtimeVersion": {
+        "policy": "appVersion"
+      }
     },
     "web": {
       "bundler": "metro",
@@ -46,6 +49,12 @@
       "eas": {
         "projectId": "9eeada4c-d30f-406e-bfaf-5f3ff8629926"
       }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/9eeada4c-d30f-406e-bfaf-5f3ff8629926"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
     }
   }
 }

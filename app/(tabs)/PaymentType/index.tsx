@@ -1,5 +1,5 @@
 import styles from '@/constants/style';
-import * as S from './styled';
+import * as S from '@/styled/styled-payment-type';
 import paymentTypesData, { PaymentTypeItem } from '@/Models/Category/payment-type';
 import React, { useState } from 'react';
 import { View, Text, FlatList, Modal, TextInput, TouchableOpacity } from 'react-native';
@@ -64,7 +64,7 @@ export default function TabPaymentType() {
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           <View>
             <S.Title>Tipos de pagamentos</S.Title>
-            <S.SubTitle>Adicione, edite ou remova tipos de pagamentos</S.SubTitle>
+            <S.SubTitle>Adicione, edite ou remova</S.SubTitle>
           </View>
           <View>
             <S.Button onPress={() => openModal()}>
