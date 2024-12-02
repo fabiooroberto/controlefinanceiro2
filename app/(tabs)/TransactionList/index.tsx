@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { View, FlatList } from 'react-native';
 import { Transaction } from '@/Models/Transaction';
 import { getTransactions } from '@/mocks/transactions';
-import * as S from './styled';
+import * as S from '@/styled/styled-transaction';
 import { Page, Container } from '@/styled/global';
 import GroupTransactionMin from '@/components/GroupTransaction';
 import { Ionicons } from '@expo/vector-icons';

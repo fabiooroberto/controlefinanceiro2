@@ -1,5 +1,5 @@
 import { Container, Page } from '@/styled/global';
-import * as S from './styled';
+import * as S from '@/styled/styled-payment';
 import { View } from 'react-native';
 
 
