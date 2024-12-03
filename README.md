@@ -76,3 +76,7 @@ GERAR APK
 ```bash
 eas build -p android --profile preview_android
 ```
+
+```bash
+eas update --channel production --platform all
+```
