@@ -1,0 +1,2 @@
+export const SUPABASE_URL = 'https://wztebxlxuofixfmmpypx.supabase.co'; //process.env.NEXT_PUBLIC_SUPABASE_URL;
+export const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind6dGVieGx4dW9maXhmbW1weXB4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQzNjgzNjYsImV4cCI6MjA0OTk0NDM2Nn0.jugkBeW87t9XQCyC7-PM2jpqb9B7hL7uI2rzpSLqpvU'; //process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;

@@ -1,5 +1,5 @@
 import { Container, Page } from '@/styled/global';
-import { View } from 'react-native';
+import { View, Button } from 'react-native';
 import * as S from '@/styled/styled-home';
 import MonthlySummaryList from '@/components/MonthlySummaryList';
 import { groupTransactionsByYearAndMonth, getTransactions } from '@/mocks/transactions';
@@ -25,6 +25,7 @@ export default function HomeScreen() {
       <Container>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           <View>
+            <Button title="Deslogar" />
             <S.Title>Categorias</S.Title>
           </View>
         </View>
