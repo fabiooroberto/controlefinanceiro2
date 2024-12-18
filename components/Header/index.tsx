@@ -14,11 +14,11 @@ interface HeaderMinProps {
 export default function HeaderMin(props: HeaderMinProps) {
   return (
     <S.Container>
-      <View style={{ width: '80%' }}>
+      <View style={{ width: '70%' }}>
         <S.Title>{props.title}</S.Title>
         <S.SubTitle>{props?.subTitle}</S.SubTitle>
       </View>
-      <View style={{ width: '20%', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <View style={{ width: '30%', flexDirection: 'column', justifyContent: 'space-between' }}>
         <LogoutButton />
         {props.action && (
           <S.ActionAdd onPress={() => props.action && props.action()}>

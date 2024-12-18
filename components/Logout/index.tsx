@@ -1,6 +1,6 @@
 import { supabase } from '@/lib/supabase';
 import React from 'react';
-import { Button, Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useAuth } from '@/contexts/AuthContext';
 import { router } from 'expo-router';
 import theme from '@/styled/theme';
@@ -20,24 +20,42 @@ const LogoutButton = () => {
         router.replace('/(auth)/signin/page');
     };
 
-    return <Pressable onPress={handlerSignout} style={styles.logout}>
-        <Text style={styles.text}>
-            <Ionicons name="log-out" size={24} color={theme.colors.secondary500} />
-        </Text>
-    </Pressable>;
+    return (
+        <View style={styles.view}>
+            <View>
+                <Pressable onPress={handlerSignout} style={styles.logout}>
+                    <Text style={styles.text}>
+                        <Ionicons name="log-out" size={24} color={theme.colors.secondary500} />
+                    </Text>
+                </Pressable>
+            </View>
+            <View>
+                <Text style={styles.text}>
+                    {useAuth().user?.user_metadata.name.split(' ')[0]}
+                </Text>
+            </View>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
+    view: {
+        flexDirection: 'row-reverse',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        alignContent: 'center',
+        textAlign: 'center',
+    },
     logout: {
-        alignContent: 'flex-end',
         color: theme.colors.textWhite,
         borderRadius: 10,
-        alignItems: 'flex-end',
     },
     text: {
-        color: theme.colors.textWhite,
-        textAlign: 'right',
-        paddingVertical: 5
+        color: theme.colors.textDefault,
+        paddingVertical: 5,
+        textTransform: 'uppercase',
+        padding: 5,
+        textAlign: 'right'
     },
 });
 
