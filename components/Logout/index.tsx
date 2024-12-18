@@ -3,6 +3,8 @@ import React from 'react';
 import { Button, Pressable, StyleSheet, Text } from 'react-native';
 import { useAuth } from '@/contexts/AuthContext';
 import { router } from 'expo-router';
+import theme from '@/styled/theme';
+import { Ionicons } from '@expo/vector-icons';
 
 const LogoutButton = () => {
     const { setAuth } = useAuth();
@@ -18,14 +20,24 @@ const LogoutButton = () => {
         router.replace('/(auth)/signin/page');
     };
 
-    return <Pressable onPress={handlerSignout}>
-        
+    return <Pressable onPress={handlerSignout} style={styles.logout}>
+        <Text style={styles.text}>
+            <Ionicons name="log-out" size={24} color={theme.colors.secondary500} />
+        </Text>
     </Pressable>;
 };
 
 const styles = StyleSheet.create({
     logout: {
-        marginRight: 10,
+        alignContent: 'flex-end',
+        color: theme.colors.textWhite,
+        borderRadius: 10,
+        alignItems: 'flex-end',
+    },
+    text: {
+        color: theme.colors.textWhite,
+        textAlign: 'right',
+        paddingVertical: 5
     },
 });
 

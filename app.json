@@ -15,7 +15,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#7DB0B1"
+        "backgroundColor": "#effefb"
       },
       "package": "com.fabiooroberto.controlefinanceiro",
       "runtimeVersion": {
@@ -33,9 +33,9 @@
         "expo-splash-screen",
         {
           "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#7DB0B1"
+          "enableFullScreenImage_legacy": true,
+          "imageWidth": 960,
+          "backgroundColor": "#effefb"
         }
       ]
     ],

@@ -20,7 +20,7 @@ export default function Login() {
         });
         if (error) {
             console.error(error);
-            Alert.alert('Erro', error.message);
+            Alert.alert('Falha na autenticação', "Login inválido");
             setLoading(false);
             return;
         }
@@ -73,8 +73,8 @@ export default function Login() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 34,
-        backgroundColor: theme.colors.secondary300,
+        backgroundColor: theme.colors.secondary50,
+        paddingTop: 41
     },
     header: {
         paddingLeft: 14,

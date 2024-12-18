@@ -72,7 +72,7 @@ const theme: DefaultTheme = {
     secondary800: "#0e5f61",
     secondary900: "#114f50",
     secondary950: "#022e31",
-    background: "#FFFFFF",
+    background: "#effefb",
     text: "#000000",
     textneutral: "#838F9B",
     textDefault: "#1A1D1D",

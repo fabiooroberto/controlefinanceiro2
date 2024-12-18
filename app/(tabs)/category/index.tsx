@@ -7,6 +7,7 @@ import { View, Text, SectionList, Modal, TextInput, TouchableOpacity } from 'rea
 import { FontAwesome, Ionicons } from '@expo/vector-icons'; // Certifique-se de ter o pacote @expo/vector-icons instalado
 import { Container, Page } from '@/styled/global';
 import theme from '@/styled/theme';
+import HeaderMin from '@/components/Header';
 
 export default function TabCategory() {
   const [categories, setCategories] = useState<Category[]>(categoriesData);
@@ -88,18 +89,7 @@ export default function TabCategory() {
   return (
     <Page>
       <Container>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-          <View>
-            <S.Title>Categorias</S.Title>
-            <S.SubTitle>Adicione, edite ou remova categorias</S.SubTitle>
-          </View>
-          <View>
-            <S.Button onPress={() => openModal(null)}>
-              <S.ButtonText>Add</S.ButtonText>
-              <Ionicons name='add' size={24} color={theme.colors.textWhite} />
-            </S.Button>
-          </View>
-        </View>
+        <HeaderMin title='Categorias' subTitle='Adicione, edite ou remova categorias' action={() => openModal(null)} />
         <SectionList
           sections={categories}
           renderItem={({ item }) => (

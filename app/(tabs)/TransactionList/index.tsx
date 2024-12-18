@@ -8,6 +8,7 @@ import GroupTransactionMin from '@/components/GroupTransaction';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
 import { useFocusEffect, useRouter } from 'expo-router';
+import HeaderMin from '@/components/Header';
 
 const groupTransactionsByMonth = (transactions: Transaction[]) => {
     return transactions.reduce((groups: { [key: string]: Transaction[] }, transaction) => {
@@ -48,27 +49,16 @@ const TransactionList: React.FC = () => {
     ), [groupedTransactions]);
 
     return (
-      <Page>
-        <Container>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                <View>
-                    <S.Title>Transações</S.Title>
-                    <S.SubTitle>Últimas transações, feitas por mês.</S.SubTitle>
-                </View>
-                <View>
-                    <S.ActionAdd onPress={() => openTransaction() }>
-                        <S.TextActionAdd>Add</S.TextActionAdd>
-                        <Ionicons name='add' size={24} color={theme.colors.textWhite} />
-                    </S.ActionAdd>
-                </View>
-            </View>
-            <FlatList
-                data={Object.keys(groupedTransactions)}
-                keyExtractor={(item) => item.toString()}
-                renderItem={renderItem}
-            />
-        </Container>
-      </Page>
+        <Page>
+            <Container>
+                <HeaderMin title='Transações' subTitle='Últimas transações, feitas por mês.' action={() => openTransaction()} />
+                <FlatList
+                    data={Object.keys(groupedTransactions)}
+                    keyExtractor={(item) => item.toString()}
+                    renderItem={renderItem}
+                />
+            </Container>
+        </Page>
     );
 };
 

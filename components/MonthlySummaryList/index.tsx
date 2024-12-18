@@ -3,6 +3,7 @@ import * as S from './styled';
 import { Text, View, FlatList } from 'react-native';
 import { useEffect } from 'react';
 import { YearMonthGroupedTransactions } from '@/mocks/transactions';
+import theme from '@/styled/theme';
 
 interface MonthlySummaryListMinProps {
   data: YearMonthGroupedTransactions[];

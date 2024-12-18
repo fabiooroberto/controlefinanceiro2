@@ -6,6 +6,7 @@ import { View, Text, FlatList, Modal, TextInput, TouchableOpacity } from 'react-
 import { FontAwesome, Ionicons } from '@expo/vector-icons'; // Certifique-se de ter o pacote @expo/vector-icons instalado
 import { Container, Page } from '@/styled/global';
 import theme from '@/styled/theme';
+import HeaderMin from '@/components/Header';
 export default function TabPaymentType() {
   const [paymentTypes, setPaymentTypes] = useState<PaymentTypeItem[]>(paymentTypesData);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -61,18 +62,7 @@ export default function TabPaymentType() {
   return (
     <Page>
       <Container>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-          <View>
-            <S.Title>Tipos de pagamentos</S.Title>
-            <S.SubTitle>Adicione, edite ou remova</S.SubTitle>
-          </View>
-          <View>
-            <S.Button onPress={() => openModal()}>
-              <S.ButtonText>Add</S.ButtonText>
-              <Ionicons name='add' size={24} color={theme.colors.textWhite} />
-            </S.Button>
-          </View>
-        </View>
+        <HeaderMin title='Tipos de pagamentos' subTitle='Adicione, edite ou remova' action={() => openModal()} />
         <FlatList
           data={paymentTypes}
           renderItem={({ item }) => (

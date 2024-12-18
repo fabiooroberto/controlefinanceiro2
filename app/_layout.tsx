@@ -56,7 +56,7 @@ function MainLayout() {
 
   return (
     <StyledThemeProvider theme={theme}>
-      <SafeAreaProvider>
+      <SafeAreaProvider style={{ backgroundColor: theme.colors.secondary50 }}>
         <Stack>
           <Stack.Screen name="/app" options={{ headerShown: false, headerShadowVisible: false }} />
           <Stack.Screen name="(auth)/signin/page" options={{ headerShown: false }} />

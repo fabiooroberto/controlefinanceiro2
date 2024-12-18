@@ -11,8 +11,8 @@ export const Year = styled.Text`
   font-size: 20px;
   font-weight: bold;
   color: ${({ theme }: { theme: DefaultTheme }) => theme.colors.text};
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 5px;
 `;
 
 export const Item = styled.View`

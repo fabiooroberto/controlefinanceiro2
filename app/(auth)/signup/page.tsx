@@ -34,64 +34,57 @@ export default function Signup() {
     }
 
     return (
-        <StyledThemeProvider theme={theme}>
-            <SafeAreaView style={{ flex: 1 }}>
-                <ScrollView style={{ flex: 1, backgroundColor: '#FFF' }}>
-                    <View style={styles.container}>
-                        <View style={styles.header}>
-                            <Pressable style={styles.backButton}
-                                onPress={() => { router.back() }}>
-                                <Ionicons name="arrow-back" size={24} color={theme.colors.textDefault} />
-                            </Pressable>
-                            <Text style={styles.logoText}>
-                                Controle <Text style={{ color: theme.colors.primary }}>Finaneiro</Text></Text>
-                            <Text style={styles.slogan}>
-                                Criar uma conta</Text>
-                        </View>
-                        <View style={styles.form}>
-                            <View>
-                                <Text style={styles.label}>Nome</Text>
-                                <TextInput
-                                    placeholder="Nome completo"
-                                    style={styles.input}
-                                    value={name}
-                                    onChangeText={setName} />
-                            </View>
-                            <View>
-                                <Text style={styles.label}>Email</Text>
-                                <TextInput
-                                    placeholder="Digite seu email"
-                                    style={styles.input}
-                                    value={email}
-                                    onChangeText={setEmail} />
-                            </View>
-                            <View>
-                                <Text style={styles.label}>Senha</Text>
-                                <TextInput
-                                    placeholder="Digite sua senha"
-                                    style={styles.input}
-                                    secureTextEntry
-                                    value={password}
-                                    onChangeText={setPassword} />
-                            </View>
-                            <Pressable style={styles.button} onPress={handleSignUp}>
-                                <Text style={styles.buttonText}>
-                                    {loading ? 'Carregando...' : 'Criar conta'}
-                                </Text>
-                            </Pressable>
-                        </View>
-                    </View>
-                </ScrollView>
-            </SafeAreaView>
-        </StyledThemeProvider>
+        <View style={styles.container}>
+            <View style={styles.header}>
+                <Pressable style={styles.backButton}
+                    onPress={() => { router.back() }}>
+                    <Ionicons name="arrow-back" size={24} color={theme.colors.textDefault} />
+                </Pressable>
+                <Text style={styles.logoText}>
+                    Controle <Text style={{ color: theme.colors.primary }}>Finaneiro</Text></Text>
+                <Text style={styles.slogan}>
+                    Criar uma conta</Text>
+            </View>
+            <View style={styles.form}>
+                <View>
+                    <Text style={styles.label}>Nome</Text>
+                    <TextInput
+                        placeholder="Nome completo"
+                        style={styles.input}
+                        value={name}
+                        onChangeText={setName} />
+                </View>
+                <View>
+                    <Text style={styles.label}>Email</Text>
+                    <TextInput
+                        placeholder="Digite seu email"
+                        style={styles.input}
+                        value={email}
+                        onChangeText={setEmail} />
+                </View>
+                <View>
+                    <Text style={styles.label}>Senha</Text>
+                    <TextInput
+                        placeholder="Digite sua senha"
+                        style={styles.input}
+                        secureTextEntry
+                        value={password}
+                        onChangeText={setPassword} />
+                </View>
+                <Pressable style={styles.button} onPress={handleSignUp}>
+                    <Text style={styles.buttonText}>
+                        {loading ? 'Carregando...' : 'Criar conta'}
+                    </Text>
+                </Pressable>
+            </View>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 34,
-        backgroundColor: theme.colors.secondary300,
+        backgroundColor: theme.colors.secondary50,
     },
     header: {
         paddingLeft: 14,
@@ -145,10 +138,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     backButton: {
-        backgroundColor: theme.colors.secondary50,
         alignSelf: 'flex-start',
-        borderRadius: 8,
-        padding: 8,
-        marginBottom: 8
+        paddingVertical: 8,
     }
 });

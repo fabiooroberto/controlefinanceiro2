@@ -1,16 +1,14 @@
-import LogoutButton from '@/components/Logout';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Platform, TouchableOpacity, View } from 'react-native';
+import { Platform } from 'react-native';
 
 export default function TabLayout() {
 
   return (
     <Tabs
       screenOptions={{
-        headerShown: true,
-        headerRight: () => <LogoutButton />,
+        headerShown: false,
         tabBarStyle: Platform.select({
           ios: {
             // Use a transparent background on iOS to show the blur effect

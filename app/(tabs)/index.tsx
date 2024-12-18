@@ -1,9 +1,8 @@
 import { Container, Page } from '@/styled/global';
-import { View, Button } from 'react-native';
-import * as S from '@/styled/styled-home';
 import MonthlySummaryList from '@/components/MonthlySummaryList';
 import { groupTransactionsByYearAndMonth, getTransactions } from '@/mocks/transactions';
 import { useEffect, useState } from 'react';
+import HeaderMin from '@/components/Header';
 
 export default function HomeScreen() {
   //const monthlySummaries = groupTransactionsByYearAndMonth(getTransactions());
@@ -23,12 +22,7 @@ export default function HomeScreen() {
   return (
     <Page>
       <Container>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-          <View>
-            <Button title="Deslogar" />
-            <S.Title>Categorias</S.Title>
-          </View>
-        </View>
+        <HeaderMin title='Resumo transações' />
         <MonthlySummaryList data={monthlySummaries} />
       </Container>
     </Page>
